@@ -1,0 +1,45 @@
+<div id="app-content">
+  <div class="input-div">
+    <mat-form-field>
+      <mat-label>Buscar produto</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por id, descrição, preço ou data de cadastro">
+    </mat-form-field>
+
+  </div>
+
+  <table mat-table [dataSource]="tableSource" matSort class="mat-elevation-z0">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Preço </th>
+      <td mat-cell *matCellDef="let element"> {{format(element.price)}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cadastrado em </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt.toLocaleString()}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagem </th>
+      <td mat-cell *matCellDef="let element"> <button *ngIf="element.imageURL" mat-button (click)="openImage(element.imageURL); $event.stopPropagation();">Abrir</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row [className]="this.onItemClick != null ? 'element-row' : ''" *matRowDef="let row; columns: displayedColumns;"  (click)="handleItemClick(row)"></tr>
+  </table>
+
+  <button *ngIf="withAddButton" (click)="openDialog()" class="mat-fab-bottom-right" mat-fab>
+    <mat-icon class="icon">add</mat-icon>
+  </button>
+</div>
