@@ -1,0 +1,37 @@
+<app-navigation-bar (toggleSidenav)="navigationSidenav.toggle()">
+</app-navigation-bar>
+
+<mat-sidenav-container autosize>
+
+  <mat-sidenav #navigationSidenav mode="over" role="navigation">
+
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <h2 class="toolbar-title">Gerenciador de pedidos</h2>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-nav-list>
+
+      <ng-container *ngIf="routes">
+
+        <a mat-list-item routerLink="/" style="height: 0;"></a>
+
+        <a (click)="navigationSidenav.close()"
+           *ngFor="let item of routes"
+           [routerLink]="[item.route]"
+           mat-list-item
+           routerLinkActive="list-item-active">
+          <mat-icon class="nav-list-icon" matListIcon> {{ item.icon }} </mat-icon>
+          {{item.title}}
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content role="main">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

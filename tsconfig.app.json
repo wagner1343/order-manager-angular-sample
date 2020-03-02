@@ -2,7 +2,12 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "target": "ES6",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
   },
   "files": [
     "src/main.ts",

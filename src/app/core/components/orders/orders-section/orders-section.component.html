@@ -1,0 +1,9 @@
+<div class="flexbox-parent" id="app-content">
+  <div fxLayout="row" style="height: 100%">
+    <app-orders-list [onItemClick]='this.onOrderClick.bind(this)' style="flex: 1"></app-orders-list>
+    <app-order-detail *ngIf="(order | async)" [order]="(order | async) " class="order-detail-card"
+                      style="flex: 1"></app-order-detail>
+  </div>
+</div>
+
+

@@ -1,0 +1,29 @@
+<ng-container
+  *ngIf="(isRegistering | async) ; then registering; else notRegistering">
+</ng-container>
+
+<ng-template #registering class="flexbox-parent">
+  <div fxLayout="column" fxLayoutAlign="space-around center" style="height: 100%">
+    <mat-card-title>Cadastrando cliente</mat-card-title>
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+<ng-template #notRegistering>
+  <div class="dialog-div">
+    <h1 mat-dialog-title>Novo cliente</h1>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input [(ngModel)]="clientData.name" matInput required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input [(ngModel)]="clientData.email" matInput required>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions style="alignment: right">
+      <button (click)="onNoClick()" mat-button>Cancelar</button>
+      <button (click)="onRegisterClick()" mat-button>Continuar</button>
+    </div>
+  </div>
+</ng-template>

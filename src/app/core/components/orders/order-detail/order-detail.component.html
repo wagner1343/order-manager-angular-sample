@@ -1,0 +1,96 @@
+<mat-card>
+  <mat-card-title>
+    Pedido {{order.id}}
+  </mat-card-title>
+  <mat-card-content>
+    <div class="flexbox-parent">
+      <div fxLayout="column wrap" fxLayoutAlign="center stretch">
+
+        <!-- CLIENTE ###########################################  -->
+        <div style="height: 16px"></div>
+        <div class="mat-h2" style="margin: 0;">Cliente</div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="mat-body-2">Id:</div>
+          <div class="mat-body-1">{{order.client.id}}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="mat-body-2">Nome:</div>
+          <div class="mat-body-1">{{order.client.name}}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="mat-body-2">Email:</div>
+          <div class="mat-body-1">{{order.client.email}}</div>
+        </div>
+        <div style="height: 16px"></div>
+        <div>
+          <mat-divider></mat-divider>
+        </div>
+
+        <!-- PAGAMENTO ###########################################  -->
+        <div style="height: 16px"></div>
+        <div class="mat-h2" style="margin: 0;">Pagamento</div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="mat-body-2">Valor:</div>
+          <div class="mat-body-1">{{format(order.value)}}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="mat-body-2">Desconto:</div>
+          <div class="mat-body-1">{{format(order.discount)}}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="mat-body-2">Valor total:</div>
+          <div class="mat-body-1">{{format(order.totalValue)}}</div>
+        </div>
+
+        <div style="height: 16px"></div>
+        <div>
+          <mat-divider></mat-divider>
+        </div>
+
+        <!-- PRODUTOS ###########################################  -->
+
+        <div style="height: 16px"></div>
+        <div class="mat-h2" style="margin: 0;">Produtos</div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Buscar</mat-label>
+            <input (keyup)="applyFilter($event)" matInput placeholder="Buscar cliente">
+          </mat-form-field>
+        </div>
+
+        <table [dataSource]="tableSource" class="mat-elevation-z3" mat-table matSort>
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Id</th>
+            <td *matCellDef="let element" mat-cell> {{element.product.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Descrição</th>
+            <td *matCellDef="let element" mat-cell> {{element.product.description}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Quantia</th>
+            <td *matCellDef="let element" mat-cell> {{element.amount}}x</td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Preço Un.</th>
+            <td *matCellDef="let element" mat-cell> {{format(element.product.price)}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalPrice">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Total</th>
+            <td *matCellDef="let element" mat-cell> {{format(element.product.price * element.amount)}} </td>
+          </ng-container>
+
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,39 @@
+<ng-container
+  *ngIf="(isRegistering | async) ; then registering; else notRegistering">
+</ng-container>
+
+<ng-template #registering class="flexbox-parent">
+  <div fxLayout="column" fxLayoutAlign="space-around center" style="height: 100%">
+    <mat-card-title>Cadastrando produto</mat-card-title>
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+<ng-template #notRegistering>
+  <div class="dialog-div">
+    <h1 mat-dialog-title>Novo produto</h1>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Descrição</mat-label>
+        <input [(ngModel)]="productData.description" matInput required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Preço</mat-label>
+        <input [(ngModel)]="productData.price" matInput required type="number">
+      </mat-form-field>
+    </div>
+    <input #imgInput (change)="fileChanged($event)" accept="image/*" hidden="true" onclick="this.value=null"
+           type="file"/>
+    <button (click)="imgInput.click()" color="primary" mat-flat-button><span style="
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+">{{(this.filename | async) || 'Adicionar imagem'}}</span></button>
+
+    <div mat-dialog-actions style="alignment: right">
+      <button (click)="onNoClick()" mat-button>Cancelar</button>
+      <button (click)="onRegisterClick()" mat-button>Continuar</button>
+    </div>
+  </div>
+</ng-template>

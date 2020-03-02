@@ -1,0 +1,8 @@
+<mat-toolbar class="crm-navigation-bar" color="primary">
+  <mat-toolbar-row>
+    <button (click)="toggleSidenav.emit()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="toolbar-title"> {{ (pageNameService.page | async)}} </span>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,49 @@
+<div class="input-div">
+  <mat-form-field>
+    <mat-label>Buscar pedido</mat-label>
+    <input (keyup)="applyFilter($event)" matInput
+           placeholder="Buscar pedido por id, cliente, valor, desconto, valor total ou data de lançamento">
+  </mat-form-field>
+</div>
+
+<div class="mat-body-2" style="padding-left: 12px">Clique em um produto ver mais detalhes</div>
+<div style="height: 2px"></div>
+<table [dataSource]="tableSource" class="mat-elevation-z0" mat-table matSort>
+
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header> Id</th>
+    <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="client.name">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header> Cliente</th>
+    <td *matCellDef="let element" mat-cell> {{element.client.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="value">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header> Valor</th>
+    <td *matCellDef="let element" mat-cell> {{format(element.value)}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="discount">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header> Desconto</th>
+    <td *matCellDef="let element" mat-cell> {{format(element.discount)}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalValue">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header> Valor total</th>
+    <td *matCellDef="let element" mat-cell> {{format(element.totalValue)}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header> Data de lançamento</th>
+    <td *matCellDef="let element" mat-cell> {{element.createdAt.toLocaleString()}} </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr (click)="handleItemClick(row)" *matRowDef="let row; columns: displayedColumns;"
+      [className]="this.onItemClick != null ? 'element-row' : ''" mat-row>>
+  </tr>
+</table>
+

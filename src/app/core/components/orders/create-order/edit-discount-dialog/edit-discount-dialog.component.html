@@ -1,0 +1,13 @@
+<div class="dialog-div">
+  <h1 mat-dialog-title>Alterar desconto</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Quantia</mat-label>
+      <input [(ngModel)]="discount" matInput type="number">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions style="alignment: right">
+    <button (click)="onNoClick()" mat-button>Cancelar</button>
+    <button [mat-dialog-close]="discount" mat-button>Alterar</button>
+  </div>
+</div>
